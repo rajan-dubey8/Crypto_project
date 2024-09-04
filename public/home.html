@@ -1,0 +1,412 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <link rel="stylesheet" href="style.css">
+   <title>Home Page</title>
+</head>
+
+<body>
+   <div class="container">
+      <h1>Welcome to the Home Page!</h1>
+      <p>You have successfully logged in.</p>
+   </div>
+</body>
+
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <link rel="stylesheet" href="style.css">
+   <title>Home Page</title>
+   <style>
+      body {
+         background: url('background.jpg') no-repeat center center fixed;
+         background-size: cover;
+         font-family: Arial, sans-serif;
+         color: #333;
+      }
+
+      .container {
+         width: 80%;
+         max-width: 600px;
+         margin: 0 auto;
+         background: rgba(255, 255, 255, 0.8);
+         padding: 20px;
+         border-radius: 10px;
+         margin-top: 100px;
+      }
+
+      h1 {
+         font-size: 24px;
+         text-align: center;
+         color: #333;
+      }
+
+      .user-info {
+         margin: 20px 0;
+      }
+
+      .change-password-btn {
+         display: block;
+         width: 100%;
+         padding: 10px;
+         margin-top: 10px;
+         background-color: #007BFF;
+         color: #fff;
+         border: none;
+         cursor: pointer;
+         border-radius: 5px;
+      }
+
+      .password-change-form {
+         display: none;
+         margin-top: 20px;
+      }
+
+      .form-input {
+         width: calc(50% - 10px);
+         padding: 8px;
+         margin: 5px;
+         border: 1px solid #ddd;
+         border-radius: 5px;
+      }
+
+      .form-input:focus {
+         border-color: #007BFF;
+      }
+
+      .submit-btn {
+         padding: 10px;
+         background-color: #28a745;
+         color: #fff;
+         border: none;
+         cursor: pointer;
+         border-radius: 5px;
+         width: calc(100% - 20px);
+      }
+
+      ::placeholder {
+         color: #888;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container">
+      <h1>Welcome to the Home Page!</h1>
+      <div class="user-info">
+         <p id="user-details">You have successfully logged in.</p>
+         <button class="change-password-btn" onclick="togglePasswordChangeForm()">Change Password</button>
+      </div>
+      <div id="password-change-form" class="password-change-form">
+         <h2>Change Password</h2>
+         <input type="password" id="old-password" class="form-input" placeholder="Old Password">
+         <input type="password" id="new-password" class="form-input" placeholder="New Password">
+         <button class="submit-btn" onclick="handleChangePassword()">Submit</button>
+      </div>
+   </div>
+   <script>
+      
+         function evaluatePasswordStrength(password) {
+            let strength = 0;
+            let suggestions = [];
+
+            if (password.length >= 8) strength++;
+            else suggestions.push("at least 8 characters");
+
+            if (/[A-Z]/.test(password)) strength++;
+            else suggestions.push("an uppercase letter");
+
+            if (/[a-z]/.test(password)) strength++;
+            else suggestions.push("a lowercase letter");
+
+            if (/[0-9]/.test(password)) strength++;
+            else suggestions.push("a number");
+
+            if (/[\W]/.test(password)) strength++;
+            else suggestions.push("a special character");
+
+            let strengthMessage = "Very Weak";
+            let color = "red";
+
+            if (strength === 5) {
+               strengthMessage = "Very Strong";
+               color = "green";
+            } else if (strength >= 4) {
+               strengthMessage = "Strong";
+               color = "green";
+            } else if (strength >= 3) {
+               strengthMessage = "Moderate";
+               color = "orange";
+            } else if (strength >= 2) {
+               strengthMessage = "Weak";
+               color = "red";
+            }
+
+            return { message: strengthMessage, color, suggestions };
+         }
+   
+      document.addEventListener("DOMContentLoaded", () => {
+         fetch("/get-user-details")
+            .then(response => response.json())
+            .then(data => {
+               if (data.success) {
+                  document.getElementById("user-details").textContent =
+                     `Welcome to the Home Page, ${data.user.email}`;
+                  const passwordStrength = evaluatePasswordStrength(user.password);
+                  console.log(user.password);
+                  console.log(passwordStrength);
+                  document.getElementById(
+                     "password-strength"
+                  ).textContent = `Password Strength: ${passwordStrength.message}`;
+                  document.getElementById("password-strength").style.color =
+                     passwordStrength.color;
+                  if (passwordStrength.suggestions.length > 0) {
+                     document.getElementById(
+                        "suggestions"
+                     ).textContent = `Suggestions: ${passwordStrength.suggestions.join(", ")}`;
+                  }   
+               } else {
+                  alert("Error fetching user details: " + data.message);
+               }
+            });
+      });
+
+      function togglePasswordChangeForm() {
+         const form = document.getElementById("password-change-form");
+         form.style.display = form.style.display === "none" ? "block" : "none";
+      }
+
+      function handleChangePassword() {
+         const oldPassword = document.getElementById("old-password").value;
+         const newPassword = document.getElementById("new-password").value;
+
+         fetch("/change-password", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ oldPassword, newPassword })
+         })
+            .then(response => response.json())
+            .then(data => {
+               alert(data.message);
+               if (data.success) togglePasswordChangeForm();
+            });
+      }
+   </script>
+</body>
+
+</html> -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <link rel="stylesheet" href="style.css">
+   <title>Home Page</title>
+   <style>
+      body {
+         background: url('background.jpg') no-repeat center center fixed;
+         background-size: cover;
+         font-family: Arial, sans-serif;
+         color: #333;
+      }
+
+      .container {
+         width: 80%;
+         max-width: 600px;
+         margin: 0 auto;
+         background: rgba(255, 255, 255, 0.8);
+         padding: 20px;
+         border-radius: 10px;
+         margin-top: 100px;
+      }
+
+      h1 {
+         font-size: 24px;
+         text-align: center;
+         color: #333;
+      }
+
+      .user-info {
+         margin: 20px 0;
+      }
+
+      .change-password-btn {
+         display: block;
+         width: 100%;
+         padding: 10px;
+         margin-top: 10px;
+         background-color: #007BFF;
+         color: #fff;
+         border: none;
+         cursor: pointer;
+         border-radius: 5px;
+      }
+
+      .password-change-form {
+         display: none;
+         margin-top: 20px;
+      }
+
+      .form-input {
+         width: calc(50% - 10px);
+         padding: 8px;
+         margin: 5px;
+         border: 1px solid #ddd;
+         border-radius: 5px;
+      }
+
+      .form-input:focus {
+         border-color: #007BFF;
+      }
+
+      .submit-btn {
+         padding: 10px;
+         background-color: #28a745;
+         color: #fff;
+         border: none;
+         cursor: pointer;
+         border-radius: 5px;
+         width: calc(100% - 20px);
+      }
+
+      ::placeholder {
+         color: #888;
+      }
+
+      /* Additional styles for password strength and suggestions */
+      #password-strength {
+         margin-top: 10px;
+         font-weight: bold;
+      }
+
+      #suggestions {
+         margin-top: 5px;
+         color: #555;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container">
+      <h1>Welcome to the Home Page!</h1>
+      <div class="user-info">
+         <p id="user-details">You have successfully logged in.</p>
+         <button class="change-password-btn" onclick="togglePasswordChangeForm()">Change Password</button>
+      </div>
+      <div id="password-change-form" class="password-change-form">
+         <h2>Change Password</h2>
+         <input type="password" id="old-password" class="form-input" placeholder="Old Password">
+         <input type="password" id="new-password" class="form-input" placeholder="New Password">
+         <button class="submit-btn" onclick="handleChangePassword()">Submit</button>
+         <p id="password-strength"></p> <!-- For displaying password strength -->
+         <p id="suggestions"></p> <!-- For displaying password suggestions -->
+      </div>
+   </div>
+   <script>
+      function evaluatePasswordStrength(password) {
+         let strength = 0;
+         let suggestions = [];
+
+         if (password.length >= 8) strength++;
+         else suggestions.push("at least 8 characters");
+
+         if (/[A-Z]/.test(password)) strength++;
+         else suggestions.push("an uppercase letter");
+
+         if (/[a-z]/.test(password)) strength++;
+         else suggestions.push("a lowercase letter");
+
+         if (/[0-9]/.test(password)) strength++;
+         else suggestions.push("a number");
+
+         if (/[\W]/.test(password)) strength++;
+         else suggestions.push("a special character");
+
+         let strengthMessage = "Very Weak";
+         let color = "red";
+
+         if (strength === 5) {
+            strengthMessage = "Very Strong";
+            color = "green";
+         } else if (strength >= 4) {
+            strengthMessage = "Strong";
+            color = "green";
+         } else if (strength >= 3) {
+            strengthMessage = "Moderate";
+            color = "orange";
+         } else if (strength >= 2) {
+            strengthMessage = "Weak";
+            color = "red";
+         }
+
+         return { message: strengthMessage, color, suggestions };
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+         fetch("/get-user-details")
+            .then(response => response.json())
+            .then(data => {
+               if (data.success) {
+                  document.getElementById("user-details").textContent =
+                     `Welcome to the Home Page, ${data.user.email}`;
+
+                  const passwordStrength = evaluatePasswordStrength(data.user.password);
+
+                  // Display password strength
+                  document.getElementById("password-strength").textContent = `Password Strength: ${passwordStrength.message}`;
+                  document.getElementById("password-strength").style.color = passwordStrength.color;
+
+                  // Display suggestions if any
+                  if (passwordStrength.suggestions.length > 0) {
+                     document.getElementById("suggestions").textContent = `Suggestions: ${passwordStrength.suggestions.join(", ")}`;
+                  }
+               } else {
+                  alert("Error fetching user details: " + data.message);
+               }
+            });
+      });
+
+      function togglePasswordChangeForm() {
+         const form = document.getElementById("password-change-form");
+         form.style.display = form.style.display === "none" ? "block" : "none";
+      }
+
+      function handleChangePassword() {
+         const oldPassword = document.getElementById("old-password").value;
+         const newPassword = document.getElementById("new-password").value;
+
+         fetch("/change-password", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ oldPassword, newPassword })
+         })
+            .then(response => response.json())
+            .then(data => {
+               alert(data.message);
+               if (data.success) togglePasswordChangeForm();
+            });
+      }
+   </script>
+</body>
+
+</html>
